@@ -1,0 +1,81 @@
+name: superops_assessment
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  #network
+  json_annotation: ^4.9.0
+  dio:
+  logger:
+  equatable: ^2.0.7
+  dartz: ^0.10.1
+  #network
+  connectivity_plus:
+  #navigation transition
+  page_transition:
+  #di
+  get_it:
+  #bloc
+  flutter_bloc:
+  #dataformatter
+  timeago: ^3.7.0
+  #local storage
+  shared_preferences:
+  #image_fetch
+  cached_network_image: ^3.4.1
+  #to add launcher icon in ios
+  flutter_launcher_icons:
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^6.9.4
+  build_runner: ^2.4.15  
+  flutter_lints: ^5.0.0
+
+flutter_launcher_icons:
+  android: false
+  ios: true
+  remove_alpha_ios: true
+  background_color_ios: "#002D46"
+  image_path: "assets/images/app_icon.png"
+
+dependency_overrides:
+  #to overcome an issue on higher version.
+  analyzer: 7.3.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/images/
+
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
