@@ -12,6 +12,8 @@ class AppStrings {
   static const internetBack = 'Internet is back';
   static const checkInternet = 'Please check your internet connection';
   static const notReachable = 'is not reacheable :(';
+  static const someError = 'Some error :(';
+  static const retry = 'Retry';
 }
 
 class AssetImagePaths {

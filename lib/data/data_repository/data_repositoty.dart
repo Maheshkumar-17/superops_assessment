@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:superops_assessment/data/data_repository/i_data_repository.dart';
 import 'package:superops_assessment/data/data_source/i_data_source.dart';
 import 'package:superops_assessment/data/models/authors_list_response_model.dart';
@@ -27,6 +28,8 @@ class DataRepository extends IDataRepository {
         //If our response model contains statusCode we can add if else clause to throw eceptions based on statusCode.
 
         return Right(response.data);
+      } on DioException catch (exception) {
+        return Left(exception);
       } on Exception catch (exception) {
         return Left(exception);
       }

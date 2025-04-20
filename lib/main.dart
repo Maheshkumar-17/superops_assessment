@@ -37,10 +37,7 @@ void _setPreferredOrientation() {
     _,
   ) {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: ColorConstants.kPrimaryWhite,
-        statusBarIconBrightness: Brightness.light,
-      ),
+      const SystemUiOverlayStyle(statusBarColor: ColorConstants.kPrimaryWhite),
     );
   });
 }

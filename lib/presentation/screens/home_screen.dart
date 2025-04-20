@@ -7,6 +7,8 @@ import 'package:superops_assessment/presentation/blocs_and_cubits/networkstatus/
 import 'package:superops_assessment/presentation/blocs_and_cubits/networkstatus/network_status_state.dart';
 import 'package:superops_assessment/presentation/colors/color_constants.dart';
 import 'package:superops_assessment/presentation/screens/widgets/authors_list_item_widget.dart';
+import 'package:superops_assessment/presentation/screens/widgets/common/alert_dialog_box.dart';
+import 'package:superops_assessment/presentation/screens/widgets/common/dialog_utils.dart';
 import 'package:superops_assessment/presentation/screens/widgets/common/retry_widget.dart';
 import 'package:superops_assessment/presentation/screens/widgets/common/search_bar_widget.dart';
 import 'package:superops_assessment/presentation/strings/app_strings.dart';
@@ -26,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late ScrollController _scrollController;
   late TextEditingController _searchBarTextController;
   List<AuthorsListItemModel> _authorsList = [];
+  bool _showAlertDialog = false;
 
   @override
   void initState() {
@@ -114,6 +117,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is AuthorsListNetworkExceptionState &&
                     _authorsList.isEmpty) {
                   return Center(child: _getRetryWidget());
+                }
+
+                if (state is AuthorsListExceptionState) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (!_showAlertDialog) {
+                      _showDialog(state.error.toString());
+                      _showAlertDialog = true;
+                    }
+                  });
                 }
                 return Column(
                   children: [
@@ -226,5 +238,21 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }
     });
+  }
+
+  void _showDialog(String alertMessage) {
+    DialogUtils.showDialogBox(
+      context,
+      dialogWidget: AlertBoxWidget(
+        alertTitle: AppStrings.someError,
+        alertMessage: alertMessage,
+        actionName: AppStrings.retry,
+        onAction: () {
+          _fetchAuthorsList();
+          _showAlertDialog = false;
+          Navigator.pop(context);
+        },
+      ),
+    );
   }
 }

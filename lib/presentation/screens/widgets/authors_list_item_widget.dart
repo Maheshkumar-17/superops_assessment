@@ -9,6 +9,7 @@ import 'package:superops_assessment/presentation/blocs_and_cubits/homescreen/aut
 import 'package:superops_assessment/presentation/colors/color_constants.dart';
 import 'package:superops_assessment/presentation/screens/widgets/common/cached_image_widget.dart';
 import 'package:superops_assessment/presentation/screens/widgets/common/delete_confirmation_dialog_box.dart';
+import 'package:superops_assessment/presentation/screens/widgets/common/dialog_utils.dart';
 import 'package:superops_assessment/presentation/screens/widgets/common/favourite_icon_button_widget.dart';
 import 'package:superops_assessment/presentation/strings/app_strings.dart';
 import 'package:superops_assessment/presentation/styles/custom_text_styles.dart';
@@ -139,28 +140,27 @@ class _AuthorsListItemWidgetState extends State<AuthorsListItemWidget> {
   }
 
   void _showDeleteConfirmationDialog() {
-    showDialog(
-      context: context,
-      builder:
-          (context) => DeleteConfirmationDialogBox(
-            onDelete: () {
-              _isBeingDeleted.value = true;
-              Navigator.pop(context);
-            },
-            onCancel: () {
-              Navigator.pop(context);
-            },
-            confirmationQuestion: AppStrings.deleteAuthor,
-            userChosenItem: BlocProvider(
-              create:
-                  (BuildContext context) =>
-                      AuthorsListCubit(getIt.get<IDataRepository>()),
-              child: AuthorsListItemWidget(
-                authorModel: widget.authorModel,
-                showFavAndDelButton: false,
-              ),
-            ),
+    DialogUtils.showDialogBox(
+      context,
+      dialogWidget: DeleteConfirmationDialogBox(
+        onDelete: () {
+          _isBeingDeleted.value = true;
+          Navigator.pop(context);
+        },
+        onCancel: () {
+          Navigator.pop(context);
+        },
+        confirmationQuestion: AppStrings.deleteAuthor,
+        userChosenItem: BlocProvider(
+          create:
+              (BuildContext context) =>
+                  AuthorsListCubit(getIt.get<IDataRepository>()),
+          child: AuthorsListItemWidget(
+            authorModel: widget.authorModel,
+            showFavAndDelButton: false,
           ),
+        ),
+      ),
     );
   }
 
