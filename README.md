@@ -1,5 +1,5 @@
 
-# MKs AuthorLine (Maheshkumar's AuthorLine)
+# MKs AuthorLog (Maheshkumar's AuthorLog)
 
 ## SuperOps Assessment
 
