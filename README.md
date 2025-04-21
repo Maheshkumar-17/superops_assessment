@@ -5,6 +5,12 @@
 
 A Flutter mobile app developed to display a list of authors and their details with user-friendly features such as pagination, search, delete, and favorite options.
 
+## App APK Link
+
+https://i.diawi.com/wentfS  
+
+This link will expire after 24 hours. If it expires, please check your email or download the APK from the 'apk' folder located in the project root directory.
+
 ---
 
 ## Flutter & Dart Versions

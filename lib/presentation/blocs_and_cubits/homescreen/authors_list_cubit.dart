@@ -88,6 +88,9 @@ class AuthorsListCubit extends Cubit<AuthorsListState> {
           _removeDeletedItemsIfAny();
         }
         emit(AuthorsListFetchSuccessState(_authorsList));
+        if (_authorsList.isEmpty || _authorsList.length < 10) {
+          fetchAuthorsList();
+        }
       },
     );
   }
@@ -139,25 +142,16 @@ class AuthorsListCubit extends Cubit<AuthorsListState> {
     } else {
       _filteredAuthorsList.removeWhere((item) => item.id == id);
     }
-    emit(AuthorItemDeletedState());
+    emit(AuthorItemDeletedState(id));
     await SharedPrefs().putStringListValue(
       PrefKey.deletedIDsList,
       _deletedAuthorIds.map((e) => e.toString()).toList(),
     );
-    _authorsList.addAll(currentList);
-    emit(AuthorsListFetchSuccessState(_authorsList));
-
-    // if (_authorsList.length < 10 && _hasMore) {
-    //   fetchAuthorsList();
-    // }
   }
 
   void _removeDeletedItemsIfAny() {
     _authorsList.removeWhere((item) => _deletedAuthorIds.contains(item.id));
     emit(AuthorsListFetchSuccessState(_authorsList));
-    // if (_authorsList.length < 10 && _hasMore && !_isFetching) {
-    //   //  fetchAuthorsList();
-    // }
   }
 
   void onLastItemVisible() {

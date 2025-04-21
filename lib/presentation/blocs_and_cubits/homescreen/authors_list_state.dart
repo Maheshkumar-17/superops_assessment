@@ -45,10 +45,11 @@ class FilteredAuthorsListEmptyState extends AuthorsListState {
 }
 
 class AuthorItemDeletedState extends AuthorsListState {
-  const AuthorItemDeletedState();
+  final int authorId;
+  const AuthorItemDeletedState(this.authorId);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [authorId];
 }
 
 class AuthorsListSmallState extends AuthorsListState {

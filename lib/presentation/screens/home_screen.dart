@@ -98,10 +98,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
                 if (state is AuthorsListFetchSuccessState) {
                   _authorsList = state.authorsList;
-                  if (_authorsList.length < 10 &&
-                      _authorsListCubit.isSearchTextEmpty) {
-                    _onLastItemVisible();
-                  }
                 }
 
                 //To handle cases when list is small initially(at the time of opening the app) due to deletion.
@@ -126,6 +122,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       _showAlertDialog = true;
                     }
                   });
+                }
+
+                if (state is AuthorItemDeletedState) {
+                  _authorsList.removeWhere(
+                    (author) => author.id == state.authorId,
+                  );
+                  if (_authorsList.length < 10 &&
+                      _authorsListCubit.isSearchTextEmpty) {
+                    _onLastItemVisible();
+                  }
                 }
                 return Column(
                   children: [
